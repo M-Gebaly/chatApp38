@@ -15,6 +15,7 @@ import javafx.stage.Stage;
  *
  * @author M.Gebaly
  */
+
 public class Chat38 extends Application {
     
     @Override
