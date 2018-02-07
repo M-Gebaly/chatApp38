@@ -17,18 +17,18 @@
             <Image url="@../img/transperantLogo.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="154.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name" wrappingWidth="118.93670654296875">
+      <Text fill="WHITE" layoutX="154.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Email" wrappingWidth="118.93670654296875">
          <font>
             <Font name="System Italic" size="16.0" />
          </font>
       </Text>
-      <TextField layoutX="212.0" layoutY="252.0" prefHeight="32.0" prefWidth="244.0" promptText="User Name" />
+      <TextField layoutX="212.0" layoutY="252.0" prefHeight="32.0" prefWidth="244.0" promptText="user@example.com" />
       <Text fill="WHITE" layoutX="154.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="118.93670654296875">
          <font>
             <Font name="System Italic" size="16.0" />
          </font>
       </Text>
-      <PasswordField layoutX="212.0" layoutY="338.0" prefHeight="32.0" prefWidth="244.0" promptText="Password" />
+      <PasswordField layoutX="212.0" layoutY="338.0" prefHeight="32.0" prefWidth="244.0" promptText="*******" />
       <Button layoutX="317.0" layoutY="389.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="119.0" style="-fx-background-color: ee2e58;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="14.0" />
@@ -39,14 +39,14 @@
             <Font size="13.0" />
          </font>
       </Hyperlink>
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="178.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="181.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/userIcon.png" />
+            <Image url="@../img/emailIcon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="178.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="27.0" fitWidth="22.0" layoutX="183.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/passwordIcone.png" />
+            <Image url="@../img/passIcon.png" />
          </image>
       </ImageView>
    </children>
