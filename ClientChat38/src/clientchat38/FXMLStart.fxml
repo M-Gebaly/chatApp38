@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="549.0" prefWidth="591.0" style="-fx-background-color: #373c3e;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientchat38.FXMLStartController">
+<AnchorPane id="AnchorPane" fx:id="loginPane" prefHeight="549.0" prefWidth="591.0" style="-fx-background-color: #373c3e;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientchat38.FXMLStartController">
    <children>
       <ImageView fitHeight="168.0" fitWidth="273.0" layoutX="159.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -34,7 +34,7 @@
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
-      <Hyperlink layoutX="234.0" layoutY="448.0" text="Create new account">
+      <Hyperlink fx:id="goToRegist" layoutX="234.0" layoutY="448.0" onAction="#registerAction" text="Create new account">
          <font>
             <Font size="13.0" />
          </font>
