@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" fx:id="loginPane" prefHeight="549.0" prefWidth="591.0" style="-fx-background-color: #373c3e;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientchat38.FXMLStartController">
    <children>
@@ -17,17 +16,7 @@
             <Image url="@../img/transperantLogo.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="154.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Email" wrappingWidth="118.93670654296875">
-         <font>
-            <Font name="System Italic" size="16.0" />
-         </font>
-      </Text>
       <TextField layoutX="212.0" layoutY="252.0" prefHeight="32.0" prefWidth="244.0" promptText="user@example.com" />
-      <Text fill="WHITE" layoutX="154.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="118.93670654296875">
-         <font>
-            <Font name="System Italic" size="16.0" />
-         </font>
-      </Text>
       <PasswordField layoutX="212.0" layoutY="338.0" prefHeight="32.0" prefWidth="244.0" promptText="*******" />
       <Button layoutX="317.0" layoutY="389.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="119.0" style="-fx-background-color: ee2e58;" text="Login" textFill="WHITE">
          <font>

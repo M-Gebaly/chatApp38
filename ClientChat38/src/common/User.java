@@ -10,6 +10,7 @@ package common;
  * @author Asmaa
  */
 public class User {
+    long id;
     String name;
     String email;
     String password;
@@ -65,6 +66,14 @@ public class User {
         this.statusFlag = statusFlag;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     
     
     
