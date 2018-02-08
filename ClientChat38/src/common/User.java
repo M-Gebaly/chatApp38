@@ -16,7 +16,17 @@ public class User {
     String password;
     String gender;
     String status;
-    Boolean statusFlag;
+    String statusFlag;
+
+    public User(long id, String name, String email, String password, String gender, String status, String statusFlag) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.status = status;
+        this.statusFlag = statusFlag;
+    }
 
     public String getEmail() {
         return email;
@@ -38,7 +48,7 @@ public class User {
         return status;
     }
 
-    public Boolean getStatusFlag() {
+    public String getStatusFlag() {
         return statusFlag;
     }
 
@@ -62,7 +72,7 @@ public class User {
         this.status = status;
     }
 
-    public void setStatusFlag(Boolean statusFlag) {
+    public void setStatusFlag(String statusFlag) {
         this.statusFlag = statusFlag;
     }
 

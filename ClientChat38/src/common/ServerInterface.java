@@ -5,15 +5,17 @@
  */
 package common;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
  *
  * @author Asmaa
  */
-public interface ServerInterface {
-    public boolean addNewUser(User user);
-    public User login(String email,String password);
-    public ArrayList<User> getFriendList(String email);
+public interface ServerInterface extends Remote{
+    public boolean addNewUser(User user)throws RemoteException;
+    public User login(String email,String password)throws RemoteException;
+    public ArrayList<User> getFriendList(String email)throws RemoteException;
     
 }
