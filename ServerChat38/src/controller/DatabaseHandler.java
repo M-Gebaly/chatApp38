@@ -14,6 +14,6 @@ import java.util.ArrayList;
 public interface DatabaseHandler {
     boolean insertUser(User user) throws SQLException;
     User loginHandler(String email, String password) throws SQLException;
-    ArrayList<User> friendListHandler(int id) throws SQLException;
+    ArrayList<User> friendListHandler(long id) throws SQLException;
     
 }
