@@ -6,26 +6,47 @@
 package controller;
 
 import common.User;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Asmaa
  */
-public class serverImpl implements common.ServerInterface{
+public class serverImpl extends UnicastRemoteObject implements common.ServerInterface {
 
+    public serverImpl() throws RemoteException{
+        
+    }
+
+    
     @Override
-    public boolean addNewUser(User user) {
+    public boolean addNewUser(User user) throws RemoteException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User login(String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User login(String email, String password) throws RemoteException{
+        try {
+            DatabaseHandlerImp databaseHandlerImp = new DatabaseHandlerImp();
+            User user = databaseHandlerImp.loginHandler(email, password);
+            if (user!= null)
+            {
+                return user;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(serverImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("user not found");
+        return null;
     }
 
     @Override
-    public ArrayList<User> getFriendList(String email) {
+    public ArrayList<User> getFriendList(String email) throws RemoteException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
