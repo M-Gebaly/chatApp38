@@ -14,31 +14,56 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oracle.jdbc.OracleDriver;
+//import oracle.jdbc.OracleDriver;
+import oracle.jdbc.driver.*;
+
 /**
  *
  * @author M.Gebaly
  */
-public class DatabaseHandlerImp implements DatabaseHandler{
+public class DatabaseHandlerImp implements DatabaseHandler {
 
     Connection conn;
     ResultSet rs;
     PreparedStatement prst;
-    
+
     public DatabaseHandlerImp() {
-         try {
-             DriverManager.registerDriver(new OracleDriver());
-             conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:mark", "hr","hr");        
-             System.out.println("connection succeeded");
-         } catch (SQLException ex) {
-             Logger.getLogger(DatabaseHandlerImp.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+            DriverManager.registerDriver(new OracleDriver());
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "chat", "chat");
+            System.out.println("connection succeeded");
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHandlerImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    
     @Override
     public boolean insertUser(User user) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO users(NAME,EMAIL,PASSWORD,GENDER,STATUS,STATUSFLAG) VALUES (?,?,?,?,?,?)";
+        String query = "select email from Users where email = '" + user.getEmail() + "'";
+        try {
+            prst = conn.prepareStatement(query);
+            rs = prst.executeQuery();
+            if (rs.next()) {
+                return false;
+            } else{
+                prst = conn.prepareStatement(sql);
+                //prst.setObject(1, user.getId());
+                prst.setObject(1, user.getName());
+                prst.setObject(2, user.getEmail());
+                prst.setObject(3, user.getPassword());
+                prst.setObject(4, user.getGender());
+                prst.setObject(5, user.getStatus());
+                prst.setObject(6, user.getStatusFlag());
+
+                prst.executeQuery();
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(serverImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 
     @Override
@@ -46,17 +71,15 @@ public class DatabaseHandlerImp implements DatabaseHandler{
         prst = conn.prepareStatement("Select * from USERS");
         rs = prst.executeQuery();
         boolean unique = false;
-                while (rs.next()) {                
-                    if (rs.getString(2).equalsIgnoreCase(email))
-                    {
-                        unique = true;
-                        break;
-                    }                                
-                }   
-                //prst.close();
-                if(unique)
-                {
-                    return new User(
+        while (rs.next()) {
+            if (rs.getString(2).equalsIgnoreCase(email)) {
+                unique = true;
+                break;
+            }
+        }
+        //prst.close();
+        if (unique) {
+            return new User(
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getString(3),
@@ -64,13 +87,13 @@ public class DatabaseHandlerImp implements DatabaseHandler{
                     rs.getString(5),
                     rs.getString(6),
                     rs.getString(7));
-                }
-                return null;
+        }
+        return null;
     }
 
     @Override
     public ArrayList<User> friendListHandler(long id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

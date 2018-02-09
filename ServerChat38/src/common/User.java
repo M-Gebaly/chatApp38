@@ -5,11 +5,13 @@
  */
 package common;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Asmaa
  */
-public class User {
+public class User implements Serializable{
     long id;
     String name;
     String email;
@@ -17,6 +19,8 @@ public class User {
     String gender;
     String status;
     String statusFlag;
+    
+    public User(){}
 
     public User(long id, String name, String email, String password, String gender, String status, String statusFlag) {
         this.id = id;
