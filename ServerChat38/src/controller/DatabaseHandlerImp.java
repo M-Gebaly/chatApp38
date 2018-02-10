@@ -57,7 +57,7 @@ public class DatabaseHandlerImp implements DatabaseHandler {
                 prst.setObject(5, user.getStatus());
                 prst.setObject(6, user.getStatusFlag());
 
-                prst.executeQuery();
+                prst.executeUpdate();
 
             }
         } catch (SQLException ex) {
