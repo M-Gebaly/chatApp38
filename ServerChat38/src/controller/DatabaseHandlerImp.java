@@ -68,7 +68,7 @@ public class DatabaseHandlerImp implements DatabaseHandler {
 
     @Override
     public User loginHandler(String email, String password) throws SQLException {
-        prst = conn.prepareStatement("Select * from USERS");
+        prst = conn.prepareStatement("Select * from USERS where email = '" + email + "' and password = '" + password + "'");
         rs = prst.executeQuery();
         boolean unique = false;
         while (rs.next()) {

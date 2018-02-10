@@ -28,7 +28,7 @@ public class serverImpl extends UnicastRemoteObject implements common.ServerInte
     public boolean addNewUser(User user) throws RemoteException{
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         boolean result = false;
-        user.setStatus("avalable");
+        user.setStatus("avaliable");
         user.setStatusFlag("true");
         DatabaseHandlerImp databaseHandlerImp = new DatabaseHandlerImp();
         try {
