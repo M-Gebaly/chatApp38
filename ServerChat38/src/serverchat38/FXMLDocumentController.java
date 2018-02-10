@@ -25,7 +25,9 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Label label;
-
+    @FXML
+    public PieChartController pieChartController;
+    
     public FXMLDocumentController() {
 
     }
