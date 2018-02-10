@@ -6,7 +6,7 @@
 package controller;
 
 import java.util.ArrayList;
-import model.Message;
+import common.Message;
 
 /**
  *

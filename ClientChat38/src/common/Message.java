@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package common;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -17,8 +17,28 @@ public class Message {
     XMLGregorianCalendar date;
     String content;
     String fontColor;
-    String fontStyle;
+    String fontFamily;
+    int fontSize;
 
+    public Message() {
+    }
+
+    public Message(String from, String to, String content, XMLGregorianCalendar date, String fontColor, String fontFamily, int fontSize) {
+        this.from = from;
+        this.to = to;
+        this.content = content;
+        this.date = date;
+        this.fontColor = fontColor;
+        this.fontFamily = fontFamily;
+        this.fontSize = fontSize;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+    
+    
+    
     public String getContent() {
         return content;
     }
@@ -31,8 +51,8 @@ public class Message {
         return fontColor;
     }
 
-    public String getFontStyle() {
-        return fontStyle;
+    public String getFontFamily() {
+        return fontFamily;
     }
 
     public String getTo() {
@@ -51,8 +71,8 @@ public class Message {
         this.fontColor = fontColor;
     }
 
-    public void setFontStyle(String fontStyle) {
-        this.fontStyle = fontStyle;
+    public void setFontFamily(String fontStyle) {
+        this.fontFamily = fontStyle;
     }
 
     public void setFrom(String from) {
@@ -62,6 +82,15 @@ public class Message {
     public void setTo(String to) {
         this.to = to;
     }
+
+    public int getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(int fontSize) {
+        this.fontSize = fontSize;
+    }
+    
     
     
 }
