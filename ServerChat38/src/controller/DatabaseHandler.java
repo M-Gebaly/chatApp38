@@ -15,5 +15,5 @@ public interface DatabaseHandler {
     boolean insertUser(User user) throws SQLException;
     User loginHandler(String email, String password) throws SQLException;
     ArrayList<User> friendListHandler(long id) throws SQLException;
-    
+    boolean update(User user)throws SQLException;
 }
