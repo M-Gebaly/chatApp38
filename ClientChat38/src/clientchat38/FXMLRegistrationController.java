@@ -5,9 +5,9 @@
  */
 package clientchat38;
 
-
 import common.ServerInterface;
 import common.User;
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -18,12 +18,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -36,23 +40,26 @@ public class FXMLRegistrationController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    public TextField rname;
-    
+    private TextField rname;
+
     @FXML
-    public TextField rpassword;
-    
+    private TextField rpassword;
+
     @FXML
-    public TextField remail;
-    
+    private TextField remail;
+
     @FXML
-    public RadioButton male;
-    
+    private RadioButton male;
+
     @FXML
-    public RadioButton female;
-    
+    private RadioButton female;
+
     @FXML
-    public Button signup_btn;
-    
+    private Button signup_btn;
+
+    @FXML
+    private AnchorPane registerPane;
+
     ServerInterface server;
 
     public FXMLRegistrationController() {
@@ -65,54 +72,56 @@ public class FXMLRegistrationController implements Initializable {
             Logger.getLogger(FXMLRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
+
     }
 
-    @FXML    
-    private void signUpAction(ActionEvent event){
+    @FXML
+    private void signUpAction(ActionEvent event) {
         String name = rname.getText();
         String Password = rpassword.getText();
         String email = remail.getText();
-        
+
         boolean isMale = male.isSelected();
         boolean isFemale = female.isSelected();
-        
-        if(name.equals("") || Password.equals("") || email.equals("")){
+
+        if (name.equals("") || Password.equals("") || email.equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setHeaderText("Look, a Warning Dialog");
-            
-            if (name.equals("") ){
+
+            if (name.equals("")) {
                 alert.setContentText("You must enter your name");
                 alert.showAndWait();
             }
-            if (Password.equals("") ){
+            if (Password.equals("")) {
                 alert.setContentText("You must enter your password");
                 alert.showAndWait();
             }
-            if (email.equals("") ){
+            if (email.equals("")) {
                 alert.setContentText("You must enter your email");
                 alert.showAndWait();
             }
-            
-        }else if (!isFemale && !isMale) {
+
+        } else if (!isFemale && !isMale) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setHeaderText("Look, a Warning Dialog");
             alert.setContentText("You must enter your Ginder");
             alert.showAndWait();
-        }else{
-            User user  = new User();
+        } else {
+            User user = new User();
             user.setName(name);
             user.setPassword(Password);
             user.setEmail(email);
-            if(isMale)
+            if (isMale) {
                 user.setGender("male");
-            if(isFemale)
+            }
+            if (isFemale) {
                 user.setGender("female");
+            }
             boolean result;
             try {
                 result = server.addNewUser(user);
@@ -122,18 +131,29 @@ public class FXMLRegistrationController implements Initializable {
                     alert.setHeaderText("Look, a Warning Dialog");
                     alert.setContentText("Falied");
                     alert.showAndWait();
-                }else{
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Dialog");
-                    alert.setHeaderText("Look, an Information Dialog");
-                    alert.setContentText("Regist Success");
-                    alert.showAndWait();
+                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLStart.fxml"));
+                        Parent root = loader.load();
+                        FXMLStartController controller = loader.getController();
+                        controller.setEmail(remail.getText());
+                        
+
+                        Scene scene = new Scene(root);
+
+                        Stage stage = (Stage) registerPane.getScene().getWindow();
+                        stage.setTitle("Login Page");
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             } catch (RemoteException ex) {
                 Logger.getLogger(FXMLRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
-    
+
 }

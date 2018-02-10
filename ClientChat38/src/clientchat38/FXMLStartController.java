@@ -16,6 +16,7 @@ import java.rmi.registry.Registry;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -49,7 +50,7 @@ public class FXMLStartController implements Initializable {
 //    }
     @FXML
     private Hyperlink goToRegist;
-
+    
     @FXML
     private AnchorPane loginPane;
     ServerInterface server = null;
@@ -59,7 +60,9 @@ public class FXMLStartController implements Initializable {
     public TextField password;
     @FXML
     public Button loginpBtn;
-
+    
+    private String emailpar = "";
+    
     public FXMLStartController() {
         try {
             Registry registry = LocateRegistry.getRegistry(2000);
@@ -70,21 +73,19 @@ public class FXMLStartController implements Initializable {
             Logger.getLogger(FXMLRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//          signUpBtn.setOnMouseClicked(new  EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                try {
-//                    server.login(email.getText(), password.getText());
-//                } catch (RemoteException ex) {
-//                    Logger.getLogger(FXMLRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });         
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                email.setText(emailpar);
+                password.setText("");
+            }
+        });
     }
-
+    
     @FXML
     private void loginAction(ActionEvent event) {
         String emailv = email.getText();
@@ -93,14 +94,24 @@ public class FXMLStartController implements Initializable {
             try {
                 User user;
                 user = server.login(email.getText(), password.getText());
-                if(user != null){
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Dialog");
-                    alert.setHeaderText("Look, an Information Dialog" + user.getEmail() + "  " + user.getPassword());
-                    alert.setContentText("Login Success");
+                if (user != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLMainChatRoom.fxml"));
+                        Parent root = loader.load();
+                        FXMLMainChatRoomController controller = loader.getController();
+                        //controller.setEmail(remail.getText());
+                        controller.setUser(user);
 
-                    alert.showAndWait();
-                }else{
+                        Scene scene = new Scene(root);
+
+                        Stage stage = (Stage) loginPane.getScene().getWindow();
+                        stage.setTitle("Chat Page");
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Information Dialog");
                     alert.setHeaderText("Look, an Information Dialog");
@@ -116,15 +127,17 @@ public class FXMLStartController implements Initializable {
             alert.setHeaderText("Look, a Warning Dialog");
             if (email.equals("")) {
                 alert.setContentText("You must enter your email");
+                alert.showAndWait();
             }
             if (password.equals("")) {
                 alert.setContentText("You must enter your password");
+                alert.showAndWait();
             }
-
-            alert.showAndWait();
+            
+            
         }
     }
-
+    
     @FXML
     private void registerAction(ActionEvent event) {
         try {
@@ -134,7 +147,7 @@ public class FXMLStartController implements Initializable {
             //controller.setText(nameTxtField.getText());
 
             Scene scene = new Scene(root);
-
+            
             Stage stage = (Stage) loginPane.getScene().getWindow();
             stage.setTitle("Register Page");
             stage.setScene(scene);
@@ -143,5 +156,9 @@ public class FXMLStartController implements Initializable {
             ex.printStackTrace();
         }
     }
-
+    
+    public void setEmail(String email) {
+        emailpar = email;
+    }
+    
 }

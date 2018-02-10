@@ -1,11 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientchat38.FXMLMainChatRoomController">
-    
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="827.0" style="-fx-background-color: #373c3e;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientchat38.FXMLMainChatRoomController">
+   <top>
+      <BorderPane prefHeight="87.0" prefWidth="827.0" BorderPane.alignment="CENTER">
+         <left>
+            <HBox prefHeight="87.0" prefWidth="275.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="69.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icon-female.png" />
+                     </image>
+                  </ImageView>
+                  <VBox prefHeight="77.0" prefWidth="192.0">
+                     <children>
+                        <Label fx:id="userNameLable" prefHeight="30.0" prefWidth="181.0" text="User Name" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="17.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="4.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="statusBox" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: ee2e58;">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </left>
+         <right>
+            <ImageView fitHeight="112.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../img/transperantLogo.png" />
+               </image>
+            </ImageView>
+         </right>
+         <center>
+            <Label text="For Advertsing" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Italic" size="24.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </top>
+   <left>
+      <VBox prefHeight="426.0" prefWidth="226.0" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane prefHeight="427.0" prefWidth="226.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Friends">
+                     <content>
+                        <ListView prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                <Tab text="Requests">
+                     <content>
+                        <ListView prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
