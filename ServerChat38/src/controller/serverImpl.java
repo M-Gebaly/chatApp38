@@ -57,8 +57,17 @@ public class serverImpl extends UnicastRemoteObject implements common.ServerInte
     }
 
     @Override
-    public ArrayList<User> getFriendList(String email) throws RemoteException{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<User> getFriendList(int id) throws RemoteException{
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<User> userFrinds = new ArrayList<>();
+        DatabaseHandlerImp databaseHandlerImp = new DatabaseHandlerImp();
+        try {
+            userFrinds = databaseHandlerImp.friendListHandler(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(serverImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("controller.serverImpl.getFriendList()");
+        return userFrinds;   
     }
     
 }

@@ -92,8 +92,28 @@ public class DatabaseHandlerImp implements DatabaseHandler {
     }
 
     @Override
-    public ArrayList<User> friendListHandler(long id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<User> friendListHandler(int id) throws SQLException {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<User> usersList = new ArrayList<>();
+        //usersList = null;
+        String sql = "SELECT * from users where id in (select friendid from addfriend where addfriend.USERID = "+id+" and addfriend.REQUESTFLAG != 0)";
+        //prst.setObject(1, id);
+        prst = conn.prepareStatement(sql);
+        rs = prst.executeQuery();
+        while (rs.next()) {
+            usersList.add(
+                    new User(
+                            rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7)
+                    )
+            );
+        }
+        return usersList;
     }
 
     @Override
